@@ -84,8 +84,19 @@ public class PlayerMovement : MonoBehaviour
     //Function that applies force to move the character with top speed and acceleration
     public void AccelerateTo(Vector3 targetVelocity, float maxAccel)
     {
+        //Setup our temporary vector
+        Vector3 tempVec = rigidbody.velocity;
+        //Figure out which axis (will always be x/z) we are working with
+        if (targetVelocity.x != 0)
+        {
+            tempVec.Set(tempVec.x, 0, 0);
+        }
+        else if (targetVelocity.z != 0)
+        {
+            tempVec.Set(0, 0, tempVec.z);
+        }
         //Setup acceleration
-        Vector3 deltaV = targetVelocity - rigidbody.velocity;
+        Vector3 deltaV = targetVelocity - tempVec;
         Vector3 accel = deltaV / Time.deltaTime;
         //Check if we are at max speed, if so, cut the power to keep a consistent top speed
         if (accel.sqrMagnitude > maxAccel * maxAccel)

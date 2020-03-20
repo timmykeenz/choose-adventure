@@ -9,6 +9,7 @@ public class GrabObject : MonoBehaviour
     [HideInInspector] new Rigidbody rigidbody;
     [HideInInspector] float dist;
     [HideInInspector] static bool isCarrying;
+    [HideInInspector] RaycastHit hit;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,8 +45,16 @@ public class GrabObject : MonoBehaviour
     bool CanGrab()
     {
         //Calculate distance between player and object (gameObject grabs current object)
-        dist = Vector3.Distance(gameObject.transform.position, player.position);
+        if (Physics.Raycast(playerCam.position, playerCam.forward, out hit, dist) && hit.transform.GetComponent<Rigidbody>())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
         //Return if
-        return dist <= grabDistance;
+
+        //return dist <= grabDistance;
     }
 }

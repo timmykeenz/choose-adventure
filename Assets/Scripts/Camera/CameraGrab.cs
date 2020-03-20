@@ -11,8 +11,8 @@ public class CameraGrab : MonoBehaviour
     public int grabDistance;
     public int grabMoveSpeed;
     //Variables to check which object we are grabbing and whether we are hitting them.
-    [HideInInspector] RaycastHit hit;
-    [HideInInspector] GameObject objectGrabbed;
+    [HideInInspector] public RaycastHit hit;
+    [HideInInspector] public GameObject objectGrabbed;
 
     //Update runs every frame
     void Update()

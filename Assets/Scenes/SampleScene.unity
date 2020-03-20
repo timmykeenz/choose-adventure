@@ -131,12 +131,12 @@ PrefabInstance:
     - target: {fileID: 2658593052125230296, guid: 91f68c8dfd4b7284188bbc21304d70ef,
         type: 3}
       propertyPath: m_Name
-      value: GrabbableObject (1)
+      value: MyGrab
       objectReference: {fileID: 0}
     - target: {fileID: 2658593052125230301, guid: 91f68c8dfd4b7284188bbc21304d70ef,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.8161683
+      value: -5.571
       objectReference: {fileID: 0}
     - target: {fileID: 2658593052125230301, guid: 91f68c8dfd4b7284188bbc21304d70ef,
         type: 3}
@@ -146,7 +146,7 @@ PrefabInstance:
     - target: {fileID: 2658593052125230301, guid: 91f68c8dfd4b7284188bbc21304d70ef,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.9852856
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2658593052125230301, guid: 91f68c8dfd4b7284188bbc21304d70ef,
         type: 3}
@@ -206,6 +206,50 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2658593052125230302, guid: 91f68c8dfd4b7284188bbc21304d70ef, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 91f68c8dfd4b7284188bbc21304d70ef, type: 3}
+--- !u!1 &371682228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 371682230}
+  - component: {fileID: 371682229}
+  m_Layer: 0
+  m_Name: TriggerListener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &371682229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371682228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 550f97222cf89c54fb683430c89080c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeMat: {fileID: 2100000, guid: cb83cd3978e277747bc347e752bb10c3, type: 2}
+--- !u!4 &371682230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371682228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.7915637, y: -3.4435644, z: 1.700736}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &455082583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -221,7 +265,7 @@ PrefabInstance:
     - target: {fileID: 2658593052125230301, guid: 91f68c8dfd4b7284188bbc21304d70ef,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.412946
+      value: -2.094
       objectReference: {fileID: 0}
     - target: {fileID: 2658593052125230301, guid: 91f68c8dfd4b7284188bbc21304d70ef,
         type: 3}
@@ -231,7 +275,7 @@ PrefabInstance:
     - target: {fileID: 2658593052125230301, guid: 91f68c8dfd4b7284188bbc21304d70ef,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.1809449
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2658593052125230301, guid: 91f68c8dfd4b7284188bbc21304d70ef,
         type: 3}
@@ -505,6 +549,7 @@ MonoBehaviour:
   grabKey: e
   grabDistance: 5
   grabMoveSpeed: 20
+  objectGrabbed: {fileID: 0}
 --- !u!1 &1258922477
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,7 +704,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649065169}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3084923, y: 1.748, z: -2.9118373}
+  m_LocalPosition: {x: -3.75, y: 1.748, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
@@ -861,7 +906,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1832839268}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.7, y: 1.03, z: -0.1500001}
+  m_LocalPosition: {x: -3.75, y: 1.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

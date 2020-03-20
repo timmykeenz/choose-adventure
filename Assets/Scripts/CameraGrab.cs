@@ -4,25 +4,36 @@ using UnityEngine;
 
 public class CameraGrab : MonoBehaviour
 {
-    [HideInInspector] RaycastHit hit;
-    GameObject objectGrabbed;
+    //Get the position passed through where the grabbed object should move to (Should be a child object of the camera)
     public Transform grabPosition;
+    //Setup user manipulatable grab parameters
+    public string grabKey;
+    public int grabDistance;
+    public int grabMoveSpeed;
+    //Variables to check which object we are grabbing and whether we are hitting them.
+    [HideInInspector] RaycastHit hit;
+    [HideInInspector] GameObject objectGrabbed;
 
+    //Update runs every frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(transform.position, transform.forward, out hit, 5) && hit.transform.GetComponent<Rigidbody>())
+        //Check if the grab key is pressed, they are looking at an object, and that the object is grabbable
+        if (Input.GetKeyDown(grabKey) && Physics.Raycast(transform.position, transform.forward, out hit, grabDistance) && hit.transform.GetComponent<Rigidbody>())
         {
-            print("Object Grabbed!");
+            //If so, grab the object
             objectGrabbed = hit.transform.gameObject;
         }
-        else if (Input.GetMouseButtonUp(0))
+        //Otherwise, drop the object
+        else if (Input.GetKeyUp(grabKey))
         {
+            //Reset the grabbed object to null
             objectGrabbed = null;
         }
-
+        //If we are currently grabbing an object
         if (objectGrabbed)
         {
-            objectGrabbed.GetComponent<Rigidbody>().velocity = 20 * (grabPosition.position - objectGrabbed.transform.position);
+            //Move the object towards the grabPosition at grabMoveSpeed
+            objectGrabbed.GetComponent<Rigidbody>().velocity = grabMoveSpeed * (grabPosition.position - objectGrabbed.transform.position);
         }
     }
 }

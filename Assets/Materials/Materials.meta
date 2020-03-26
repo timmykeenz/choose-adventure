@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Materials/Materials.meta
 guid: 0474dc729dcc20041b4ad2a04dd97c1a
+=======
+guid: 7ef499a668a40274f822bc2744b7061a
+>>>>>>> Scene:Assets/Meshes.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

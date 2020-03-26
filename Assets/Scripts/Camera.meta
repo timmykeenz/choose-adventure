@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scripts/Camera.meta
 guid: 29dd09882a013714e86683d6a537f3a5
 folderAsset: yes
 DefaultImporter:
+=======
+guid: 5789755133233034aa2a517462978b85
+PrefabImporter:
+>>>>>>> Scene:Assets/Meshes/Prefabs/Book1.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

@@ -17,6 +17,11 @@ public class CameraGrab : MonoBehaviour
     //Update runs every frame
     void Update()
     {
+        GrabObject();
+    }
+    //Method for grabbing objects
+    public void GrabObject()
+    {
         //Check if the grab key is pressed, they are looking at an object, and that the object is grabbable
         if (Input.GetKeyDown(grabKey) && Physics.Raycast(transform.position, transform.forward, out hit, grabDistance) && hit.transform.GetComponent<Rigidbody>())
         {

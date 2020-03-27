@@ -500,8 +500,24 @@ PrefabInstance:
       propertyPath: m_Height
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6214800121228743721, guid: 43c0c79b15ea8af40b0e43375c9f1fde,
+        type: 3}
+      propertyPath: sensitivity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214800121228743721, guid: 43c0c79b15ea8af40b0e43375c9f1fde,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1402442522}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43c0c79b15ea8af40b0e43375c9f1fde, type: 3}
+--- !u!1 &1402442522 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6214800120505386381, guid: 43c0c79b15ea8af40b0e43375c9f1fde,
+    type: 3}
+  m_PrefabInstance: {fileID: 1280975234}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1633408162
 GameObject:
   m_ObjectHideFlags: 0

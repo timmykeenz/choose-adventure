@@ -7,10 +7,11 @@ public class DisplayInRange : MonoBehaviour
     public GameObject player;
     public float showDistance;
     [HideInInspector] float distance;
+    [HideInInspector] public bool displayText;
     // Start is called before the first frame update
     void Start()
     {
-        
+        displayText = true;
     }
 
     // Update is called once per frame
@@ -19,7 +20,7 @@ public class DisplayInRange : MonoBehaviour
         //Calculate distance from object to player
         distance = Vector3.Distance(player.GetComponent<Transform>().transform.position, transform.position);
         //Make object visible when in range
-        if (distance < showDistance)
+        if (distance < showDistance && displayText)
         {
             GetComponent<MeshRenderer>().enabled = true;
         }

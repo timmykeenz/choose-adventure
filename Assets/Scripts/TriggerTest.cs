@@ -31,12 +31,23 @@ public class TriggerTest : MonoBehaviour
         //Check if the player is trying to use an object
         if (cameraUse.objectToUse)
         {
-            print(cameraUse.objectToUse);
             //Create a holder to shorten the object name (So we don't have to type cameraUse.objectToUse every time)
             tempObject = cameraUse.objectToUse;
             if (tempObject.name == "Radio")
             {
+                //Load in an audio clip to the radio
                 tempObject.GetComponent<AudioSource>().clip = (AudioClip)Resources.Load("Audio/GameMusic1");
+                //Activate the audio source
+                if (Camera.main.GetComponent<CameraUse>().isUsing)
+                {
+                    tempObject.GetComponent<PlayMusic>().activate = true;
+                    tempObject.transform.GetChild(0).gameObject.GetComponent<TMPro.TextMeshPro>().text = "Press 'e' to grab me!";
+                }
+                //Reset in case the object is used again
+                else
+                {
+                    tempObject.GetComponent<PlayMusic>().activate = false;
+                }
             }
         }
     }

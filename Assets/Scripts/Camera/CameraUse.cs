@@ -7,7 +7,7 @@ public class CameraUse : MonoBehaviour
     //Setup user manipulatable grab parameters
     public string useKey;
     public int useDistance;
-    //Variables to check which object we are grabbing and whether we are hitting them.
+    //Variables to check which object we are using and whether we are hitting them.
     [HideInInspector] public bool isUsing;
     [HideInInspector] public RaycastHit hit;
     [HideInInspector] public GameObject objectToUse;

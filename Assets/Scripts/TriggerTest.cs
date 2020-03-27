@@ -5,9 +5,14 @@ using UnityEngine;
 public class TriggerTest : MonoBehaviour
 {
     public Material changeMat;
+    public GameObject player;
     private CameraGrab cameraGrab;
     private CameraUse cameraUse;
     private GameObject tempObject;
+    private GameObject chairController;
+    private AudioSource radioAudio;
+    private float delayTime;
+    private bool chairFlag;
     private bool removeTutorialText;
     // Start is called before the first frame update
     void Start()
@@ -15,6 +20,11 @@ public class TriggerTest : MonoBehaviour
         cameraGrab = FindObjectOfType<CameraGrab>();
         cameraUse = FindObjectOfType<CameraUse>();
         removeTutorialText = false;
+        //Setup chair part of sequence
+        chairController = GameObject.Find("ChairController");
+        chairController.SetActive(false);
+        radioAudio = GameObject.Find("Radio").GetComponent<AudioSource>();
+        chairFlag = false;
     }
 
     // Update is called once per frame
@@ -24,6 +34,59 @@ public class TriggerTest : MonoBehaviour
         CheckRadioGrab();
         //Check if we are using the radio
         CheckRadioUse();
+        //Check chair distance
+        CheckChairDistance();
+    }
+    public void CheckChairDistance()
+    {
+        //Only run this method if the parent container is active
+        if (chairController.activeSelf)
+        {
+            GameObject armChairBlue = GameObject.Find("ArmChairBlue");
+            GameObject armChairRed = GameObject.Find("ArmChairRed");
+            Light chairLight = GameObject.Find("ChairLight").GetComponent<Light>();
+
+            //Calculate distance from object to player
+            double distanceBlue = Vector3.Distance(player.GetComponent<Transform>().transform.position, armChairBlue.GetComponent<Transform>().transform.position);
+            double distanceRed = Vector3.Distance(player.GetComponent<Transform>().transform.position, armChairRed.GetComponent<Transform>().transform.position);
+            //Make sure the radio isn't playing
+            if (!radioAudio.isPlaying)
+            {
+                //See if they are close to the blue chair
+                if (distanceBlue < 1.5 && !chairFlag)
+                {
+                    chairLight.color = UnityEngine.Color.blue;
+                    radioAudio.clip = (AudioClip)Resources.Load("Audio/TestLevel/TestLevelGood");
+                    GameObject.Find("Radio").GetComponent<PlayMusic>().activate = false;
+                    GameObject.Find("Radio").GetComponent<PlayMusic>().activate = true;
+                    chairFlag = true;
+                    delayTime = 7f;
+                }
+                //See if they are close to the red chair
+                else if (distanceRed < 1.5 && !chairFlag)
+                {
+                    chairLight.color = UnityEngine.Color.red;
+                    radioAudio.clip = (AudioClip)Resources.Load("Audio/TestLevel/TestLevelBad");
+                    GameObject.Find("Radio").GetComponent<PlayMusic>().activate = false;
+                    GameObject.Find("Radio").GetComponent<PlayMusic>().activate = true;
+                    delayTime = 14f;
+                    chairFlag = true;
+                }
+            }
+            //Throw the chair if we've done our task
+            if (chairFlag && radioAudio.isPlaying)
+            {
+                //Get rid of that red chair after x seconds
+                StartCoroutine(ShootArmChair(armChairRed, delayTime));
+            }
+        }
+    }
+    //IEnumerator is for delayed functions
+    IEnumerator ShootArmChair(GameObject armChairRed, float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        //Applay the force
+        armChairRed.GetComponent<Rigidbody>().AddForce(-1000, 0, 0);
     }
     public void CheckRadioGrab()
     {
@@ -47,13 +110,20 @@ public class TriggerTest : MonoBehaviour
             tempObject = cameraUse.objectToUse;
             if (tempObject.name == "Radio")
             {
-                //Load in an audio clip to the radio
-                tempObject.GetComponent<AudioSource>().clip = (AudioClip)Resources.Load("Audio/GameMusic2");
                 //Activate the audio source
                 if (Camera.main.GetComponent<CameraUse>().isUsing)
                 {
+                    if (!chairFlag)
+                    {
+                        //Load in an audio clip to the radio
+                        radioAudio.clip = (AudioClip)Resources.Load("Audio/TestLevel/TestLevelIntro");
+                    }
                     //Activate and play our music in our Radio's script
                     tempObject.GetComponent<PlayMusic>().activate = true;
+                    //Check if the chairs are active
+                    if (!chairController.activeSelf) {
+                        chairController.SetActive(true);
+                    }
                 }
                 //Reset in case the object is used again
                 else

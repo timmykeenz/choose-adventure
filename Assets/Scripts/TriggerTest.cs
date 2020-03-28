@@ -133,7 +133,7 @@ public class TriggerTest : MonoBehaviour
                 //Change the tutorial text
                 if (!removeTutorialText)
                 {
-                    tempObject.transform.GetChild(0).gameObject.GetComponent<TMPro.TextMeshPro>().text = "Press 'e' to grab me!";
+                    tempObject.transform.GetChild(0).gameObject.GetComponent<TMPro.TextMeshPro>().text = "Press 'e' to grab";
                     //Once they've grabbed the object, remove the text
                 }
                 else

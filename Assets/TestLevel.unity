@@ -191,6 +191,7 @@ GameObject:
   - component: {fileID: 453791790}
   - component: {fileID: 453791789}
   - component: {fileID: 453791793}
+  - component: {fileID: 453791794}
   m_Layer: 0
   m_Name: RadioHelpText
   m_TagString: Untagged
@@ -205,16 +206,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 453791787}
-  m_LocalRotation: {x: 0.5029853, y: 0.49699682, z: 0.49699685, w: 0.5029852}
-  m_LocalPosition: {x: 0, y: 0, z: 0.001}
-  m_LocalScale: {x: 0.0013171699, y: 0.0013171699, z: 0.0013171699}
+  m_LocalRotation: {x: 0.42519242, y: 0.5649881, z: 0.564988, w: 0.42519233}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.0013171701, y: 0.0013171698, z: 0.00131717}
   m_Children: []
   m_Father: {fileID: 1043916975}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0.68600005, y: 90.00001, z: 90.00001}
+  m_LocalEulerAnglesHint: {x: -16.072, y: 90.00001, z: 90.00001}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.006}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &453791789
@@ -235,7 +236,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press 'f' to use me
+  m_text: Press 'f' to use
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -270,7 +271,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 257
+  m_textAlignment: 258
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -301,13 +302,13 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 5.627489, w: 3.5934956}
+  m_margin: {x: 5.380493, y: 0, z: 5.692847, w: 3.5934956}
   m_textInfo:
     textComponent: {fileID: 453791789}
-    characterCount: 19
+    characterCount: 16
     spriteCount: 0
-    spaceCount: 4
-    wordCount: 5
+    spaceCount: 3
+    wordCount: 4
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -397,6 +398,19 @@ MonoBehaviour:
   player: {fileID: 6214800121375056911}
   showDistance: 3
   displayText: 0
+--- !u!114 &453791794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453791787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b84338182e73404d89dee2b53fbcb67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToLookAt: {fileID: 6214800121375056911}
 --- !u!1001 &585547358
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1133,6 +1147,16 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 6214800121375056911}
+    - target: {fileID: 6214800121228743721, guid: 43c0c79b15ea8af40b0e43375c9f1fde,
+        type: 3}
+      propertyPath: minimumY
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214800121228743721, guid: 43c0c79b15ea8af40b0e43375c9f1fde,
+        type: 3}
+      propertyPath: maximumY
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 6214800121228743722, guid: 43c0c79b15ea8af40b0e43375c9f1fde,
         type: 3}
       propertyPath: grabDistance

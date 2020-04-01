@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public static bool gameIsPaused = false;
+    public GameObject inGameHUD;
     public GameObject pauseMenuUI;
 
     // Update is called once per frame
@@ -29,6 +30,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         gameIsPaused = false;
+        //Add player's in-game HUD
+        inGameHUD.SetActive(true);
     }
     //Function pauses game
     private void Pause()
@@ -36,6 +39,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         gameIsPaused = true;
+        //Remove player's in-game HUD
+        inGameHUD.SetActive(false);
     }
     public void LoadMenu()
     {

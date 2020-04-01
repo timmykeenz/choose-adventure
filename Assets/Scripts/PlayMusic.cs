@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayMusic : MonoBehaviour
 {
     //This is the song that will be passed through
-    public GameObject inGameHUD;
     public AudioSource audio;
     //Switch turns on/off the song
     private bool songSwitch;

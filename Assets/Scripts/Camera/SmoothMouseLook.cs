@@ -6,7 +6,6 @@ public class SmoothMouseLook : MonoBehaviour
 {
     public GameObject player;
     public float sensitivity;
-    Vector2 rotation;
     Transform playerTransform;
     //Setup y axis variables
     public float minimumY = -60F;
@@ -18,23 +17,25 @@ public class SmoothMouseLook : MonoBehaviour
     private void Start()
     {
         rigidbody = player.GetComponent<Rigidbody>();
-        rotation = new Vector2(0, 0);
 
     }
     void Update()
     {
-        //Move the rigidbody the camera is attached to on the X-axis
-        Quaternion rotation = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * sensitivity, Vector3.up);
-        rigidbody.MoveRotation(rigidbody.rotation * rotation);
+        //Only allow mouse movement if game is not paused
+        if (!PauseMenu.gameIsPaused)
+        {
+            //Move the rigidbody the camera is attached to on the X-axis
+            Quaternion rotation = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * sensitivity, Vector3.up);
+            rigidbody.MoveRotation(rigidbody.rotation * rotation);
 
-        //Grab velocity from the mouse
-        rotationY += Input.GetAxis("Mouse Y") * sensitivity;
-        //Setup max angle for mouse
-        rotAverageY = ClampAngle(rotationY, minimumY, maximumY);
-        //Rotate the camera
-        Quaternion yQuaternion = Quaternion.AngleAxis(rotAverageY, Vector3.left);
-        transform.localRotation = yQuaternion;
-        
+            //Grab velocity from the mouse
+            rotationY += Input.GetAxis("Mouse Y") * sensitivity;
+            //Setup max angle for mouse
+            rotAverageY = ClampAngle(rotationY, minimumY, maximumY);
+            //Rotate the camera
+            Quaternion yQuaternion = Quaternion.AngleAxis(rotAverageY, Vector3.left);
+            transform.localRotation = yQuaternion;
+        }
     }
     //Function created by some smart dude that clamps the mouse angle using normalization
     public static float ClampAngle(float angle, float min, float max)

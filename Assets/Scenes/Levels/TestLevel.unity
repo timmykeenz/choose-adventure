@@ -1464,6 +1464,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1503930044 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1518420303651707165, guid: b237294232688324b8d96e6f49b5a64b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1518420303550509487}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1616865232
 GameObject:
   m_ObjectHideFlags: 0
@@ -2494,12 +2500,22 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 347169783}
+    - target: {fileID: 1518420303651707164, guid: b237294232688324b8d96e6f49b5a64b,
+        type: 3}
+      propertyPath: audio
+      value: 
+      objectReference: {fileID: 1503930044}
     - target: {fileID: 1518420303651707165, guid: b237294232688324b8d96e6f49b5a64b,
         type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: 24300002, guid: 99e03c2c3cf12a648a0a1eaf1108cea1,
         type: 2}
+    - target: {fileID: 1518420303651707165, guid: b237294232688324b8d96e6f49b5a64b,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5793942452324441607, guid: b237294232688324b8d96e6f49b5a64b,
         type: 3}
       propertyPath: m_LocalPosition.x

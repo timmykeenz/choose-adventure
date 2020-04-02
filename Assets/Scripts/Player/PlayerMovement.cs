@@ -56,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
     //Fixed update is called zero, once, or multiple times per frame
     void FixedUpdate()
     {
-
         if (Input.GetKey("w"))
         {
             AccelerateTo(forward, acceleration);

@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public float acceleration;
     public float sprintFactor;
     public float jumpForce;
+    public float fallSpeed;
     //Grab our distance to ground
     [HideInInspector] float distToGround;
     //Setup the different force directions
@@ -94,11 +95,6 @@ public class Player : MonoBehaviour
         {
             rigidbody.AddForce(0, jumpForce, 0, ForceMode.Impulse);
         }
-
-        if (!Input.GetKey("w") && !Input.GetKey("s") && !Input.GetKey("a") && !Input.GetKey("d") && IsGrounded())
-        {
-            rigidbody.velocity = new Vector3(0, 0, 0);
-        }
     }
 
     //Fixed update is called zero, once, or multiple times per frame
@@ -121,6 +117,18 @@ public class Player : MonoBehaviour
         if (moveRight)
         {
             AccelerateTo(right, acceleration);
+        }
+
+        //If player is in the air, increase gravity for a quicker fall time
+        if (!IsGrounded())
+        {
+            rigidbody.AddForce(Physics.gravity * (rigidbody.mass * rigidbody.mass * fallSpeed));
+        }
+
+        //Implement braking if no button is pressed
+        if (!Input.GetKey("w") && !Input.GetKey("s") && !Input.GetKey("a") && !Input.GetKey("d") && IsGrounded())
+        {
+            rigidbody.velocity = rigidbody.velocity * 0.85f;
         }
     }
 

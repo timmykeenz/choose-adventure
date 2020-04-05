@@ -9,6 +9,7 @@ public class CameraGrab : MonoBehaviour
     //Setup user manipulatable grab parameters
     public string grabKey;
     public int grabDistance;
+    public float throwReduction;
     public int grabMoveSpeed;
     //Variables to check which object we are grabbing and whether we are hitting them.
     [HideInInspector] public RaycastHit hit;
@@ -31,6 +32,7 @@ public class CameraGrab : MonoBehaviour
         //Otherwise, drop the object
         else if (Input.GetKeyUp(grabKey))
         {
+            objectGrabbed.GetComponent<Rigidbody>().velocity = objectGrabbed.GetComponent<Rigidbody>().velocity / (objectGrabbed.GetComponent<Rigidbody>().mass * throwReduction);
             //Reset the grabbed object to null
             objectGrabbed = null;
         }
@@ -38,7 +40,7 @@ public class CameraGrab : MonoBehaviour
         if (objectGrabbed)
         {
             //Move the object towards the grabPosition at grabMoveSpeed
-            objectGrabbed.GetComponent<Rigidbody>().velocity = grabMoveSpeed * (grabPosition.position - objectGrabbed.transform.position);
+            objectGrabbed.GetComponent<Rigidbody>().velocity = grabMoveSpeed * (grabPosition.position - objectGrabbed.transform.position) / objectGrabbed.GetComponent<Rigidbody>().mass;
         }
     }
 }

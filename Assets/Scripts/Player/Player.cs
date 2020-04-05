@@ -2,29 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
-    //Public variables that can be set by user
-    public new Rigidbody rigidbody;
-    public float targetVelocity;
+    //Setup player control variables
+    public float maxVelocity;
     public float acceleration;
     public float sprintFactor;
     public float jumpForce;
-    //Setup the different force directions (They are intialized in start)
+    //Grab our distance to ground
+    [HideInInspector] float distToGround;
+    //Setup the different force directions
     [HideInInspector] Vector3 forward = new Vector3();
     [HideInInspector] Vector3 left = new Vector3();
     [HideInInspector] Vector3 right = new Vector3();
     [HideInInspector] Vector3 back = new Vector3();
-    //Setup a distance to ground variable
-    [HideInInspector] float distToGround;
-
+    //Grab our rigidbody to control forces
+    [HideInInspector] Rigidbody rigidbody;
+    //Setup movement booleans
+    private bool moveForward = false;
+    private bool moveBack = false;
+    private bool moveLeft = false;
+    private bool moveRight = false;
     // Start is called before the first frame update
     void Start()
     {
         //Grab player rigid body component
         rigidbody = GetComponent<Rigidbody>();
         //Setup forces for basic player movement
-        UpdateTargetVelocity(targetVelocity);
+        UpdateTargetVelocity(maxVelocity);
         // get the distance to ground
         distToGround = GetComponent<Collider>().bounds.extents.y;
     }
@@ -32,18 +37,56 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Move Forward
+        if (Input.GetKey("w"))
+        {
+            moveForward = true;
+        } else
+        {
+            moveForward = false;
+        }
+
+        //Move Backwards
+        if (Input.GetKey("s"))
+        {
+            moveBack = true;
+        }
+        else
+        {
+            moveBack = false;
+        }
+
+        //Move Left
+        if (Input.GetKey("a"))
+        {
+            moveLeft = true;
+        }
+        else
+        {
+            moveLeft = false;
+        }
+
+        //Move Right
+        if (Input.GetKey("d"))
+        {
+            moveRight = true;
+        }
+        else
+        {
+            moveRight = false;
+        }
         //Check if shift is pressed and add sprinting
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             //Add to target velocity and acceleration power
-            UpdateTargetVelocity(targetVelocity * sprintFactor);
+            UpdateTargetVelocity(maxVelocity * sprintFactor);
             acceleration *= sprintFactor;
         }
         //When shift is released, go back to normal speed
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             //Decrease target velocity and acceleration power
-            UpdateTargetVelocity(targetVelocity);
+            UpdateTargetVelocity(maxVelocity);
             acceleration /= sprintFactor;
         }
         //Check if space is hit for jumping and check if player is on ground
@@ -54,39 +97,33 @@ public class PlayerMovement : MonoBehaviour
 
         if (!Input.GetKey("w") && !Input.GetKey("s") && !Input.GetKey("a") && !Input.GetKey("d") && IsGrounded())
         {
-            rigidbody.velocity = new Vector3(0,0,0);
+            rigidbody.velocity = new Vector3(0, 0, 0);
         }
     }
 
     //Fixed update is called zero, once, or multiple times per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("w"))
+        if (moveForward)
         {
             AccelerateTo(forward, acceleration);
         }
 
-        if (Input.GetKey("s"))
+        if (moveBack)
         {
             AccelerateTo(back, acceleration);
         }
-        if (Input.GetKey("a"))
+        if (moveLeft)
         {
             AccelerateTo(left, acceleration);
         }
 
-        if (Input.GetKey("d"))
+        if (moveRight)
         {
             AccelerateTo(right, acceleration);
         }
-      /*  if (Mathf.Abs(rigidbody.velocity.x) > targetVelocity || Mathf.Abs(rigidbody.velocity.y) > targetVelocity)
-        {
-            // clamp velocity:
-            Vector3 newVelocity = rigidbody.velocity.normalized;
-            newVelocity *= targetVelocity;
-            rigidbody.velocity = newVelocity;
-        }*/
     }
+
     void OnGUI()
     {
         GUI.Label(new Rect(20, 20, 200, 200), "rigidbody velocity: " + rigidbody.velocity);
@@ -123,7 +160,8 @@ public class PlayerMovement : MonoBehaviour
         this.right.Set(target, 0, 0);
     }
     //Check if player is on ground
-    bool IsGrounded() {
+    bool IsGrounded()
+    {
         //Raycast to determine if player is on ground, 0.1f is the play in case the ground isn't perfectly even
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
     }

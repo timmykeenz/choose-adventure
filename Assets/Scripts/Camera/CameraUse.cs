@@ -8,9 +8,10 @@ public class CameraUse : MonoBehaviour
     public string useKey;
     public int useDistance;
     //Variables to check which object we are using and whether we are hitting them.
-    [HideInInspector] public bool isUsing;
+    [HideInInspector] public static bool isUsing;
+    [HideInInspector] public static string usedKey;
+    [HideInInspector] public static GameObject objectToUse;
     [HideInInspector] public RaycastHit hit;
-    [HideInInspector] public GameObject objectToUse;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class CameraUse : MonoBehaviour
         //Set variable defaults
         objectToUse = null;
         isUsing = false;
+        usedKey = useKey;
     }
 
     // Update is called once per frame

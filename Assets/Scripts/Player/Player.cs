@@ -100,20 +100,22 @@ public class Player : MonoBehaviour
     //Fixed update is called zero, once, or multiple times per frame
     void FixedUpdate()
     {
+        //Call our function to move forward
         if (moveForward)
         {
             AccelerateTo(forward, acceleration);
         }
-
+        //Call our function to move backwards
         if (moveBack)
         {
             AccelerateTo(back, acceleration);
         }
+        //Call our function to move left
         if (moveLeft)
         {
             AccelerateTo(left, acceleration);
         }
-
+        //Call our function to move right
         if (moveRight)
         {
             AccelerateTo(right, acceleration);
@@ -131,7 +133,7 @@ public class Player : MonoBehaviour
             rigidbody.velocity = rigidbody.velocity * 0.85f;
         }
     }
-
+    //Debugging speed GUI
     void OnGUI()
     {
         GUI.Label(new Rect(20, 20, 200, 200), "rigidbody velocity: " + rigidbody.velocity);

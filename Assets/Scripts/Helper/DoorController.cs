@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //Runs when a collision is detected
     private void OnTriggerStay(Collider other)
     {   
         //Check that the player is what we are colliding with and not some object

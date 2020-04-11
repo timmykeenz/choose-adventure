@@ -9,4 +9,8 @@ public class Levels : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+    public void LevelOne()
+    {
+        SceneManager.LoadScene(2);
+    }
 }

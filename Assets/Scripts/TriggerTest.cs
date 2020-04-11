@@ -7,7 +7,6 @@ public class TriggerTest : MonoBehaviour
     public Material changeMat;
     public GameObject player;
     private CameraGrab cameraGrab;
-    private CameraUse cameraUse;
     private GameObject tempObject;
     private GameObject chairController;
     private AudioSource radioAudio;
@@ -18,7 +17,6 @@ public class TriggerTest : MonoBehaviour
     void Start()
     {
         cameraGrab = FindObjectOfType<CameraGrab>();
-        cameraUse = FindObjectOfType<CameraUse>();
         removeTutorialText = false;
         //Setup chair part of sequence
         chairController = GameObject.Find("ChairController");
@@ -104,14 +102,14 @@ public class TriggerTest : MonoBehaviour
     public void CheckRadioUse()
     {
         //Check if the player is trying to use an object
-        if (cameraUse.objectToUse)
+        if (CameraUse.objectToUse)
         {
             //Create a holder to shorten the object name (So we don't have to type cameraUse.objectToUse every time)
-            tempObject = cameraUse.objectToUse;
+            tempObject = CameraUse.objectToUse;
             if (tempObject.name == "Radio")
             {
                 //Activate the audio source
-                if (Camera.main.GetComponent<CameraUse>().isUsing)
+                if (CameraUse.isUsing)
                 {
                     if (!chairFlag)
                     {

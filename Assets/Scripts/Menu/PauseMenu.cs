@@ -9,6 +9,13 @@ public class PauseMenu : MonoBehaviour
     public GameObject inGameHUD;
     public GameObject pauseMenuUI;
 
+    //On start, make the mouse hidden
+    void Start()
+    {
+        //Make cursor invisible
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -32,6 +39,9 @@ public class PauseMenu : MonoBehaviour
         gameIsPaused = false;
         //Add player's in-game HUD
         inGameHUD.SetActive(true);
+        //Make cursor invisible
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     //Function pauses game
     private void Pause()
@@ -41,11 +51,17 @@ public class PauseMenu : MonoBehaviour
         gameIsPaused = true;
         //Remove player's in-game HUD
         inGameHUD.SetActive(false);
+        //Make cursor visible and usable
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
     public void LoadMenu()
     {
         //Unpause game
         this.Resume();
+        //Make cursor visible and usable for menu (Resume will make it invisible)
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         //Scene of index 0 should always be menu...
         SceneManager.LoadScene(0);
     }

@@ -17814,6 +17814,21 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 420029619}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2026664713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026664711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fedf0c6cd143bdc4ebc1d44d16ced309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bobbingSpeed: 0.5
+  bobbingAmount: 0.02
+  midpoint: 0.5
 --- !u!114 &2026664719
 MonoBehaviour:
   m_ObjectHideFlags: 0

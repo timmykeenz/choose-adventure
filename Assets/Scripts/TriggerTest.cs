@@ -89,10 +89,10 @@ public class TriggerTest : MonoBehaviour
     public void CheckRadioGrab()
     {
         //Check if player is grabbing an object
-        if (cameraGrab.objectGrabbed)
+        if (CameraGrab.objectGrabbed)
         {
             //Check which object they are grabbing (Using static strings may not be the best idea)
-            if (cameraGrab.objectGrabbed.name == "Radio")
+            if (CameraGrab.objectGrabbed.name == "Radio")
             {
                 removeTutorialText = true;
             }

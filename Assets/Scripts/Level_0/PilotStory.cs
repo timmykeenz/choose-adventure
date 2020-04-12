@@ -4,29 +4,19 @@ using UnityEngine;
 
 public class PilotStory : MonoBehaviour
 {
-    private bool explodedWalls = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    public GameObject gate;
+    private bool triggerGate = false;
     // Update is called once per frame
     void Update()
     {
         //Check if the object exists
-        if (CameraUse.objectToUse && CameraUse.isUsing && !explodedWalls)
+        if (CameraUse.objectToUse && CameraUse.isUsing)
         {
-            if (CameraUse.objectToUse.tag.Equals("Radio"))
+            if (CameraUse.objectToUse.tag.Equals("Radio") && !triggerGate)
             {
-                explodedWalls = true;
-                GameObject[] walls = GameObject.FindGameObjectsWithTag("ExplodingWall");
-                //Loop through walls
-                for (int i = 0; i < walls.Length; i++)
-                {
-                    walls[i].GetComponent<Rigidbody>().isKinematic = false;
-                    walls[i].GetComponent<Rigidbody>().AddRelativeForce(0, 0, 1000);
-                }
+                triggerGate = true;
+                //Looks for animator in object's children and set trigger
+                gate.GetComponentInChildren<Animator>().SetTrigger("OpenClose");
             }
         }
     }

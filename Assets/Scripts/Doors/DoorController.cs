@@ -6,7 +6,7 @@ public class DoorController : MonoBehaviour
 {
     //Runs when a collision is detected
     private void OnTriggerStay(Collider other)
-    {   
+    {
         //Check that the player is what we are colliding with and not some object
         if (other.tag.Equals("Player") && Input.GetKeyDown(CameraUse.usedKey))
         {

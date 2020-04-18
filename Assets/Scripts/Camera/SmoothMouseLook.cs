@@ -19,7 +19,7 @@ public class SmoothMouseLook : MonoBehaviour
         rigidbody = player.GetComponent<Rigidbody>();
 
     }
-    void Update()
+    void LateUpdate()
     {
         //Only allow mouse movement if game is not paused
         if (!PauseMenu.gameIsPaused)

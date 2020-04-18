@@ -2,7 +2,13 @@
 
 public class PlaceBattery : MonoBehaviour
 {
-    public static bool isConnected = false;
+    public static bool isConnected;
+
+    private void Start()
+    {
+        //Make sure the battery resets to disconnected on level start
+        isConnected = false;
+    }
 
     private void OnTriggerEnter(Collider other)
     {

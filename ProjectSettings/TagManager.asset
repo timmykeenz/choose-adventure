@@ -8,6 +8,7 @@ TagManager:
   - Button
   - Battery
   - Tutorial
+  - Radio
   layers:
   - Default
   - TransparentFX

@@ -6,6 +6,8 @@ public class CameraGrab : MonoBehaviour
 {
     //Get the position passed through where the grabbed object should move to (Should be a child object of the camera)
     public Transform grabPosition;
+    public Transform grabLookPosition;
+    public float rotSpeed;
     //Setup user manipulatable grab parameters
     public string grabKey;
     public int grabDistance;
@@ -20,6 +22,22 @@ public class CameraGrab : MonoBehaviour
     void Update()
     {
         GrabObject();
+    }
+    private void FixedUpdate()
+    {
+        //Only update when grabbing an object
+        if (isGrabbing)
+        {
+            //Move the object towards the grabPosition at grabMoveSpeed
+            objectGrabbed.GetComponent<Rigidbody>().velocity = grabMoveSpeed * (grabPosition.position - objectGrabbed.transform.position) / objectGrabbed.GetComponent<Rigidbody>().mass;
+            //Reduce that angular velocity to mitigate shake when carrying objects
+            objectGrabbed.GetComponent<Rigidbody>().angularVelocity = new Vector3(0,0,0);
+            //Throw object when released
+            if (Input.GetKeyUp(grabKey))
+            {
+                objectGrabbed.GetComponent<Rigidbody>().velocity = objectGrabbed.GetComponent<Rigidbody>().velocity / (objectGrabbed.GetComponent<Rigidbody>().mass * throwReduction);
+            }
+        }
     }
     //Method for grabbing objects
     public void GrabObject()
@@ -37,15 +55,22 @@ public class CameraGrab : MonoBehaviour
         {
             //Update to let user know we are no longer grabbing an ojbect
             isGrabbing = false;
-            objectGrabbed.GetComponent<Rigidbody>().velocity = objectGrabbed.GetComponent<Rigidbody>().velocity / (objectGrabbed.GetComponent<Rigidbody>().mass * throwReduction);
             //Reset the grabbed object to null
             objectGrabbed = null;
         }
         //If we are currently grabbing an object
         if (objectGrabbed)
         {
-            //Move the object towards the grabPosition at grabMoveSpeed
-            objectGrabbed.GetComponent<Rigidbody>().velocity = grabMoveSpeed * (grabPosition.position - objectGrabbed.transform.position) / objectGrabbed.GetComponent<Rigidbody>().mass;
+            
+            //Rotate the object
+            Vector3 targetLookAtPoint = objectGrabbed.GetComponent<Transform>().position - grabLookPosition.position;
+            targetLookAtPoint = new Vector3(targetLookAtPoint.x, transform.position.y, targetLookAtPoint.z);
+            // Remove this line if your turret is supposed to be able to look up and down
+            targetLookAtPoint.Normalize();
+            targetLookAtPoint = Vector3.Slerp(transform.forward, targetLookAtPoint, Time.deltaTime * rotSpeed);
+            targetLookAtPoint += transform.position;
+            //objectGrabbed.GetComponent<Transform>().LookAt(grabLookPosition.position);
+            objectGrabbed.GetComponent<Transform>().LookAt(targetLookAtPoint);
         }
     }
 }

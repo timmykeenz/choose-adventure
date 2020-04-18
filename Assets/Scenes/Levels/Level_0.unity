@@ -10553,6 +10553,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3168788812960087701, guid: 154fe905bd9b43847900205413278211,
+        type: 3}
+      propertyPath: grabLookPosition
+      value: 
+      objectReference: {fileID: 772928882}
+    - target: {fileID: 3168788812960087701, guid: 154fe905bd9b43847900205413278211,
+        type: 3}
+      propertyPath: rotSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3168788813273625895, guid: 154fe905bd9b43847900205413278211,
         type: 3}
       propertyPath: m_Name
@@ -11459,6 +11469,36 @@ Transform:
   m_Father: {fileID: 1535597373}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &772928881
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 772928882}
+  m_Layer: 0
+  m_Name: ObjectLook
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &772928882
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772928881}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2026664712}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &777552826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11984,6 +12024,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gate: {fileID: 1871187324985257011}
   batteryHolderText: {fileID: 1453789635}
+  radioHelpText: {fileID: 677630677}
 --- !u!1 &953944107 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: fdb35f48b71c140418f60025e882faac,
@@ -12407,7 +12448,7 @@ Transform:
   m_GameObject: {fileID: 1201343548}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.5, z: 7.618}
-  m_LocalScale: {x: 6, y: 3, z: 1}
+  m_LocalScale: {x: 6, y: 3, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 14
@@ -12557,6 +12598,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1707749500292654196, guid: 7e9d123afe61d1a44954d9f097b6588c,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707749500292654196, guid: 7e9d123afe61d1a44954d9f097b6588c,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707749500292654196, guid: 7e9d123afe61d1a44954d9f097b6588c,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707749500292654196, guid: 7e9d123afe61d1a44954d9f097b6588c,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6864456950684202250, guid: 7e9d123afe61d1a44954d9f097b6588c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12630,6 +12691,11 @@ PrefabInstance:
     - target: {fileID: 7572849926911608601, guid: 7e9d123afe61d1a44954d9f097b6588c,
         type: 3}
       propertyPath: m_Name
+      value: Radio
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572849926911608601, guid: 7e9d123afe61d1a44954d9f097b6588c,
+        type: 3}
+      propertyPath: m_TagString
       value: Radio
       objectReference: {fileID: 0}
     m_RemovedComponents: []

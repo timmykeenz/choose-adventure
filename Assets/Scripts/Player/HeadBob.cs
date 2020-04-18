@@ -6,12 +6,13 @@ public class HeadBob : MonoBehaviour
 {
 
     private float timer = 0.0f;
-    public float bobbingSpeed = 0.18f;
+    public float bobSpeed = 0.18f;
+    private float bobbingSpeed = 0.18f;
     public float bobbingAmount = 0.2f;
     public float midpoint = 2.0f;
-
     void Update()
     {
+        bobbingSpeed = bobSpeed * Time.deltaTime;
         if (!PauseMenu.gameIsPaused)
         {
             float waveslice = 0.0f;

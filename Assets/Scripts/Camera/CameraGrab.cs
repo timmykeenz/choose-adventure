@@ -43,7 +43,7 @@ public class CameraGrab : MonoBehaviour
     public void GrabObject()
     {
         //Check if the grab key is pressed, they are looking at an object, and that the object is grabbable
-        if (Input.GetKeyDown(grabKey) && Physics.Raycast(transform.position, transform.forward, out hit, grabDistance) && hit.transform.GetComponent<Rigidbody>())
+        if (Input.GetKeyDown(grabKey) && Physics.Raycast(transform.position, transform.forward, out hit, grabDistance) && hit.transform.GetComponent<Rigidbody>() && !hit.transform.GetComponent<Rigidbody>().isKinematic)
         {
             //Let the user know that they are grabbing an object
             isGrabbing = true;
@@ -51,7 +51,7 @@ public class CameraGrab : MonoBehaviour
             objectGrabbed = hit.transform.gameObject;
         }
         //Otherwise, drop the object
-        else if (Input.GetKeyUp(grabKey))
+        else if (Input.GetKeyUp(grabKey) || !isGrabbing)
         {
             //Update to let user know we are no longer grabbing an ojbect
             isGrabbing = false;
@@ -61,16 +61,28 @@ public class CameraGrab : MonoBehaviour
         //If we are currently grabbing an object
         if (objectGrabbed)
         {
-            
-            //Rotate the object
-            Vector3 targetLookAtPoint = objectGrabbed.GetComponent<Transform>().position - grabLookPosition.position;
-            targetLookAtPoint = new Vector3(targetLookAtPoint.x, transform.position.y, targetLookAtPoint.z);
-            // Remove this line if your turret is supposed to be able to look up and down
-            targetLookAtPoint.Normalize();
-            targetLookAtPoint = Vector3.Slerp(transform.forward, targetLookAtPoint, Time.deltaTime * rotSpeed);
-            targetLookAtPoint += transform.position;
-            //objectGrabbed.GetComponent<Transform>().LookAt(grabLookPosition.position);
-            objectGrabbed.GetComponent<Transform>().LookAt(targetLookAtPoint);
+            //--- Physics related properties when object is grabbed are located in FixedUpdate ---
+
+            //Rotate the object towards player
+            RotateTowardsPlayer();
         }
+    }
+    /**
+     * Function rotates picked up object to look at player
+     */
+    private void RotateTowardsPlayer()
+    {
+        //Grab the point to look at
+        Vector3 targetLookAtPoint = objectGrabbed.GetComponent<Transform>().position - grabLookPosition.position;
+        //Create a position off of the point
+        targetLookAtPoint = new Vector3(targetLookAtPoint.x, transform.position.y, targetLookAtPoint.z);
+        //Normalize the data (Same direction, but magnitude is 1)
+        targetLookAtPoint.Normalize();
+        //Do the slerp thing to interpolate the rotation towards the player
+        targetLookAtPoint = Vector3.Slerp(transform.forward, targetLookAtPoint, Time.deltaTime * rotSpeed);
+        //Update our target point with current position
+        targetLookAtPoint += transform.position;
+        //Look at player
+        objectGrabbed.GetComponent<Transform>().LookAt(targetLookAtPoint);
     }
 }

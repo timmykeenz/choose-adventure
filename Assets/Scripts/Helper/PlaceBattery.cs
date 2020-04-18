@@ -15,6 +15,7 @@ public class PlaceBattery : MonoBehaviour
         //Checks if the tag is a battery
         if (other.tag.Equals("Battery") && !isConnected)
         {
+            CameraGrab.isGrabbing = false;
             //Set isConnected
             isConnected = true;
             //Make it so the Rigidbody can't move

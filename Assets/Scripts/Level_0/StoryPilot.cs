@@ -6,6 +6,7 @@ public class StoryPilot : MonoBehaviour
 {
     public GameObject gate;
     public GameObject batteryHolderText;
+    public GameObject radioHelpText;
     public static bool entryGateOpened;
     public static bool hasGrabbedBattery;
     private static bool showHolderText;
@@ -51,6 +52,20 @@ public class StoryPilot : MonoBehaviour
                     //If so remove the text
                     GameObject.Find("GrabHelperText").SetActive(false);
                 }
+            }
+        }
+        //Check if radio is being used
+        CheckRadioUse();
+    }
+    public void CheckRadioUse()
+    {
+        //Check if the player is trying to use an object
+        if (CameraUse.objectToUse)
+        {
+            if (CameraUse.objectToUse.tag.Equals("Radio") && CameraUse.isUsing)
+            {
+                //Run this on radio use
+                radioHelpText.SetActive(false);
             }
         }
     }

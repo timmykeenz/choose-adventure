@@ -17,6 +17,8 @@ public class StoryPilot : MonoBehaviour
     public static bool entryGateOpened;
     public static bool hasGrabbedBattery;
     private static bool showHolderText;
+    private bool startRadio;
+    private bool doorsEnabled;
 
     private void Start()
     {
@@ -26,6 +28,13 @@ public class StoryPilot : MonoBehaviour
         hasGrabbedBattery = false;
         //Show holder text starts off by default
         showHolderText = false;
+        //Radio has not played
+        startRadio = false;
+        //Doors are disabled by default
+        doorsEnabled = false;
+        //Doors cannot be opened by default
+        redDoor.SetUserCanOpen(false);
+        blueDoor.SetUserCanOpen(false);
         //Disable rooms behind doors
         blueChoiceRoom.SetActive(false);
         redChoiceRoom.SetActive(false);
@@ -40,8 +49,12 @@ public class StoryPilot : MonoBehaviour
         CheckBattery();
         //Check if radio is being used
         CheckRadioUse();
-        //Check which door the user chose
-        CheckDoors();
+        //Check to make sure user has played radio before making choice
+        if (startRadio)
+        {
+            //Check which door the user chose 
+            CheckDoors();
+        }
     }
     private void CheckDoors()
     { 
@@ -55,11 +68,11 @@ public class StoryPilot : MonoBehaviour
             blueRoomTrigger = true;
         } else if (blueRoomTrigger)
         {
-            //Reset trigger
-            blueRoomTrigger = false;
             //Enable red door and deactivate the room on door close
             redDoor.SetUserCanOpen(true);
             StartCoroutine(DisableGameObject(roomDeactivationTime, blueChoiceRoom));
+            //Reset trigger
+            blueRoomTrigger = false;
         }
         //If red door is open
         if (redDoor.isOpen)
@@ -71,18 +84,25 @@ public class StoryPilot : MonoBehaviour
             redRoomTrigger = true;
         } else if (redRoomTrigger)
         {
-            //Reset trigger
-            redRoomTrigger = false;
             //Enable blue door and deactivate the room on door close
             blueDoor.SetUserCanOpen(true);
             StartCoroutine(DisableGameObject(roomDeactivationTime, redChoiceRoom));
+            //Reset trigger
+            redRoomTrigger = false;
         } 
+        //Enable doors on first iteration
+        if (!doorsEnabled)
+        {
+            doorsEnabled = !doorsEnabled;
+            blueDoor.SetUserCanOpen(true);
+            redDoor.SetUserCanOpen(true);
+        }
+        print("Blue door: " + blueDoor.isOpen);
     }
     IEnumerator DisableGameObject(float time, GameObject obj)
     {
-        //Make code wait for 'x' amount of time
+        //Make code wait for 'x' amount of time before executing below
         yield return new WaitForSeconds(time);
-        print("Running!");
         //Disable GameObject
         obj.SetActive(false);
     }
@@ -132,6 +152,7 @@ public class StoryPilot : MonoBehaviour
         {
             if (CameraUse.objectToUse.tag.Equals("Radio") && CameraUse.isUsing)
             {
+                startRadio = true;
                 //Run this on radio use
                 radioHelpText.SetActive(false);
             }

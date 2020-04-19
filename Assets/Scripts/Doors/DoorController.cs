@@ -12,7 +12,7 @@ public class DoorController : MonoBehaviour
     {
         nearTo = null;
         isOpen = false;
-        userCanOpen = true;
+        userCanOpen = false;
     }
 
     private void Update()
@@ -29,7 +29,7 @@ public class DoorController : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         //Check that the player is what we are colliding with and not some object
-        if (other.tag.Equals("Player") && Input.GetKeyDown(CameraUse.usedKey) && userCanOpen)
+        if (other.tag.Equals("Player"))
         {
             nearTo = other.gameObject;
         }
@@ -56,6 +56,7 @@ public class DoorController : MonoBehaviour
     {
         isOpen = !isOpen;
         //Looks for animator in object's children and set trigger
-        GetComponentInChildren<Animator>().SetTrigger("OpenClose");
+        GetComponentInChildren<Animator>().SetBool("doorIsOpen", isOpen);
+        Debug.Log("Animation was played!");
     }
 }

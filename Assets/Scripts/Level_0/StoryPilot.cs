@@ -7,6 +7,8 @@ public class StoryPilot : MonoBehaviour
     public GameObject gate;
     public GameObject batteryHolderText;
     public GameObject radioHelpText;
+    public DoorController redDoor;
+    public DoorController blueDoor;
     public static bool entryGateOpened;
     public static bool hasGrabbedBattery;
     private static bool showHolderText;
@@ -20,6 +22,32 @@ public class StoryPilot : MonoBehaviour
 
     void Update()
     {
+        //Check if the battery has been plugged in 
+        CheckBattery();
+        //Check if radio is being used
+        CheckRadioUse();
+        //Check which door the user chose
+        CheckDoors();
+    }
+    private void CheckDoors()
+    {
+        if (blueDoor.isOpen)
+        {
+            redDoor.SetUserCanOpen(false);
+        } else
+        {
+            redDoor.SetUserCanOpen(true);
+        }
+        if (redDoor.isOpen)
+        {
+            blueDoor.SetUserCanOpen(false);
+        } else
+        {
+            blueDoor.SetUserCanOpen(true);
+        }
+    }
+    private void CheckBattery()
+    {
         if (PlaceBattery.isConnected && !entryGateOpened)
         {
             showHolderText = false;
@@ -30,8 +58,9 @@ public class StoryPilot : MonoBehaviour
         if (showHolderText)
         {
             batteryHolderText.SetActive(true);
-        //If not, make it invisible
-        } else
+            //If not, make it invisible
+        }
+        else
         {
             batteryHolderText.SetActive(false);
         }
@@ -48,16 +77,15 @@ public class StoryPilot : MonoBehaviour
             {
                 hasGrabbedBattery = true;
                 //Check if we have a tutorial element
-                if (GameObject.Find("GrabHelperText").tag.Equals("Tutorial")) {
+                if (GameObject.Find("GrabHelperText").tag.Equals("Tutorial"))
+                {
                     //If so remove the text
                     GameObject.Find("GrabHelperText").SetActive(false);
                 }
             }
         }
-        //Check if radio is being used
-        CheckRadioUse();
     }
-    public void CheckRadioUse()
+    private void CheckRadioUse()
     {
         //Check if the player is trying to use an object
         if (CameraUse.objectToUse)

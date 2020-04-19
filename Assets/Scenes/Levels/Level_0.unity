@@ -10563,6 +10563,11 @@ PrefabInstance:
       propertyPath: rotSpeed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3168788812960087701, guid: 154fe905bd9b43847900205413278211,
+        type: 3}
+      propertyPath: grabMoveSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3168788813273625895, guid: 154fe905bd9b43847900205413278211,
         type: 3}
       propertyPath: m_Name
@@ -12025,6 +12030,8 @@ MonoBehaviour:
   gate: {fileID: 1871187324985257011}
   batteryHolderText: {fileID: 1453789635}
   radioHelpText: {fileID: 677630677}
+  redDoor: {fileID: 1456781644456510929}
+  blueDoor: {fileID: 1456781643188416845}
 --- !u!1 &953944107 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: fdb35f48b71c140418f60025e882faac,
@@ -12551,6 +12558,11 @@ PrefabInstance:
     - target: {fileID: 1456781643826991621, guid: c2b3337629ca4614480c9ebb381d13da,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456781644335144299, guid: c2b3337629ca4614480c9ebb381d13da,
+        type: 3}
+      propertyPath: isOpen
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -18694,7 +18706,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 1.5e-44, z: 1.0863e-41, w: 1.04e-43}
+  m_BoundingSphereOverride: {x: 7.55e-43, y: -9.380713e-21, z: 7.54e-43, w: -8.91528e+9}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -19497,6 +19509,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 276bfcbcbf4e45e47a5d09e9c3a69e70, type: 3}
+--- !u!114 &1456781643188416845 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1456781644335144299, guid: c2b3337629ca4614480c9ebb381d13da,
+    type: 3}
+  m_PrefabInstance: {fileID: 1282010150}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb14f2af17f5fc24d8ff793905ba0795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1456781644456510929 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1456781644335144299, guid: c2b3337629ca4614480c9ebb381d13da,
+    type: 3}
+  m_PrefabInstance: {fileID: 415504570}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb14f2af17f5fc24d8ff793905ba0795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1871187324191165216
 Transform:
   m_ObjectHideFlags: 0

@@ -57,6 +57,5 @@ public class DoorController : MonoBehaviour
         isOpen = !isOpen;
         //Looks for animator in object's children and set trigger
         GetComponentInChildren<Animator>().SetBool("doorIsOpen", isOpen);
-        Debug.Log("Animation was played!");
     }
 }

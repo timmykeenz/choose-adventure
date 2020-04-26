@@ -9,11 +9,14 @@ public class StoryPilot : MonoBehaviour
     public GameObject radioHelpText;
     public DoorController redDoor;
     public DoorController blueDoor;
+    [HideInInspector] public static DoorController redRefDoor;
+    [HideInInspector] public static DoorController blueRefDoor;
     public GameObject blueChoiceRoom;
     public GameObject redChoiceRoom;
     public float roomDeactivationTime;
-    private bool redRoomTrigger;
-    private bool blueRoomTrigger;
+    [HideInInspector] public static bool redRoomTrigger;
+    [HideInInspector] public static bool blueRoomTrigger;
+    [HideInInspector] public static bool roomChosen;
     public static bool entryGateOpened;
     public static bool hasGrabbedBattery;
     private static bool showHolderText;
@@ -41,6 +44,11 @@ public class StoryPilot : MonoBehaviour
         //Setup triggers for the rooms (Don't touch these values)
         redRoomTrigger = false;
         blueRoomTrigger = false;
+        //Make sure the user has not chosen a room on level boot
+        roomChosen = false;
+        //Setup static references so other objects can utilize the door choices
+        redRefDoor = redDoor;
+        blueRefDoor = blueDoor;
     }
 
     void Update()
@@ -52,8 +60,14 @@ public class StoryPilot : MonoBehaviour
         //Check to make sure user has played radio before making choice
         if (startRadio)
         {
-            //Check which door the user chose 
-            CheckDoors();
+            if (!roomChosen)
+            {
+                //Check which door the user chose 
+                CheckDoors();
+            } else
+            {
+                //---- Use redRoomTrigger and blueRoomTrigger to determine which path the user took ----
+            }
         }
     }
     private void CheckDoors()
@@ -97,7 +111,6 @@ public class StoryPilot : MonoBehaviour
             blueDoor.SetUserCanOpen(true);
             redDoor.SetUserCanOpen(true);
         }
-        print("Blue door: " + blueDoor.isOpen);
     }
     IEnumerator DisableGameObject(float time, GameObject obj)
     {

@@ -157,9 +157,28 @@ public class Player : MonoBehaviour
         Vector3 accel = deltaV / Time.deltaTime;
         //Check if we are at max speed, if so, cut the power to keep a consistent top speed
         if (accel.sqrMagnitude > maxAccel * maxAccel)
-            accel = accel.normalized * maxAccel;
+        {
+            if (CheckSlope() > 0.1 || CheckSlope() < -0.1)
+            {
+                Debug.Log(CheckSlope());
+                accel = accel.normalized * maxAccel * (System.Math.Abs(CheckSlope()) * 10);
+            } else
+            {
+                accel = accel.normalized * maxAccel;
+            }
+        }
         //Apply the force
         rigidbody.AddRelativeForce(accel, ForceMode.Acceleration);
+    }
+    private float CheckSlope()
+    {
+        float slope = 0f;
+        RaycastHit hit;
+        if (Physics.SphereCast(transform.position, .25f, Vector3.down, out hit, 3f))
+        {
+            slope = Vector3.Dot(transform.right, (Vector3.Cross(Vector3.up, hit.normal)));
+        }
+        return slope;
     }
     //Function to update all velocities to one speed
     void UpdateTargetVelocity(float target)

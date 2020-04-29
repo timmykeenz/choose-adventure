@@ -22,6 +22,9 @@ public class StoryPilot : MonoBehaviour
     private static bool showHolderText;
     private bool startRadio;
     private bool doorsEnabled;
+    private bool loadFullMusic;
+    public AudioSource audioSource;
+    public AudioSource radioSource;
 
     private void Start()
     {
@@ -49,6 +52,8 @@ public class StoryPilot : MonoBehaviour
         //Setup static references so other objects can utilize the door choices
         redRefDoor = redDoor;
         blueRefDoor = blueDoor;
+        //Music will not be fully loaded at start
+        loadFullMusic = false;
     }
 
     void Update()
@@ -62,10 +67,20 @@ public class StoryPilot : MonoBehaviour
         {
             if (!roomChosen)
             {
-                //Check which door the user chose 
-                CheckDoors();
+                //Check to make sure radio audio is not playing
+                if (!radioSource.isPlaying)
+                {
+                    //Check which door the user chose 
+                    CheckDoors();
+                }
             } else
             {
+                if (!loadFullMusic)
+                {
+                    loadFullMusic = true;
+                    audioSource.clip = (AudioClip)Resources.Load("Audio/Level0/Level0BG_Full");
+                    audioSource.Play();
+                }
                 //---- Use redRoomTrigger and blueRoomTrigger to determine which path the user took ----
                 //Check if the player is trying to use an object
                 if (CameraUse.objectToUse)
@@ -136,6 +151,8 @@ public class StoryPilot : MonoBehaviour
             showHolderText = false;
             entryGateOpened = true;
             gate.GetComponentInChildren<Animator>().Play("OpenGate");
+            audioSource.clip = (AudioClip)Resources.Load("Audio/Level0/Level0BG_Mixed");
+            audioSource.Play();
         }
         //Check if we should show the text for the battery holder
         if (showHolderText)
@@ -175,9 +192,20 @@ public class StoryPilot : MonoBehaviour
         {
             if (CameraUse.objectToUse.tag.Equals("Radio") && CameraUse.isUsing)
             {
-                startRadio = true;
-                //Run this on radio use
-                radioHelpText.SetActive(false);
+                if (!startRadio)
+                {
+                    GameObject.FindGameObjectWithTag("Radio").GetComponent<AudioSource>().clip = (AudioClip)Resources.Load("Audio/Level0/RadioAudio");
+                    GameObject.FindGameObjectWithTag("Radio").GetComponent<AudioSource>().Play();
+                    startRadio = true;
+                    //Run this on radio use to remove help text
+                    radioHelpText.SetActive(false);
+                } else
+                {
+                    if (radioSource.isPlaying)
+                    {
+                        radioSource.Stop();
+                    }
+                }
             }
         }
     }

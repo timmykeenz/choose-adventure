@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     public float sprintFactor;
     public float jumpForce;
     public float fallSpeed;
+    public float minimumTerrainAngle;
+    public float angleBoost;
     //Grab our distance to ground
     [HideInInspector] float distToGround;
     //Setup the different force directions
@@ -130,7 +132,7 @@ public class Player : MonoBehaviour
         //Implement braking if no button is pressed
         if (!Input.GetKey("w") && !Input.GetKey("s") && !Input.GetKey("a") && !Input.GetKey("d") && IsGrounded())
         {
-            rigidbody.velocity = rigidbody.velocity * 0.85f;
+            rigidbody.velocity *= 0.85f;
         }
     }
     //Debugging speed GUI
@@ -158,9 +160,11 @@ public class Player : MonoBehaviour
         //Check if we are at max speed, if so, cut the power to keep a consistent top speed
         if (accel.sqrMagnitude > maxAccel * maxAccel)
         {
-            if (CheckSlope() > 0.1 || CheckSlope() < -0.1)
+            //Check if slope is great enough to apply boost
+            if (CheckSlope() > minimumTerrainAngle || CheckSlope() < -minimumTerrainAngle)
             {
-                accel = accel.normalized * maxAccel * (System.Math.Abs(CheckSlope()) * 10);
+                accel = accel.normalized * maxAccel * (System.Math.Abs(CheckSlope()) * angleBoost);
+            //Otherwise, normalize the player's speed
             } else
             {
                 accel = accel.normalized * maxAccel;

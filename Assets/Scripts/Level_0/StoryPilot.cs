@@ -67,6 +67,16 @@ public class StoryPilot : MonoBehaviour
             } else
             {
                 //---- Use redRoomTrigger and blueRoomTrigger to determine which path the user took ----
+                //Check if the player is trying to use an object
+                if (CameraUse.objectToUse)
+                {
+                    if (CameraUse.objectToUse.tag.Equals("Book") && CameraUse.isUsing)
+                    {
+                        //Load Menu
+                        Levels levelSelector = new Levels();
+                        levelSelector.LoadMenu();
+                    }
+                }
             }
         }
     }

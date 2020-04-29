@@ -160,7 +160,6 @@ public class Player : MonoBehaviour
         {
             if (CheckSlope() > 0.1 || CheckSlope() < -0.1)
             {
-                Debug.Log(CheckSlope());
                 accel = accel.normalized * maxAccel * (System.Math.Abs(CheckSlope()) * 10);
             } else
             {

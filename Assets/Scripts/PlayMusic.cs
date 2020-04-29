@@ -60,6 +60,13 @@ public class PlayMusic : MonoBehaviour
             runMethod = true;
         }
     }
+    public void StopAudio()
+    {
+        if (audio.isPlaying)
+        {
+            audio.Stop();
+        }
+    }
     //Method to set the audio source that this file plays
     public void setAudio(AudioSource audio)
     {

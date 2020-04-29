@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
     public static bool gameIsPaused = false;
     public GameObject inGameHUD;
     public GameObject pauseMenuUI;
+    public AudioSource audioSource;
 
     //On start, make the mouse hidden
     void Start()
@@ -34,6 +35,8 @@ public class PauseMenu : MonoBehaviour
     //Function resumes gameplay
     public void Resume()
     {
+        //Resume the music
+        audioSource.UnPause();
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         gameIsPaused = false;
@@ -46,6 +49,8 @@ public class PauseMenu : MonoBehaviour
     //Function pauses game
     private void Pause()
     {
+        //Pause the music
+        audioSource.Pause();
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         gameIsPaused = true;

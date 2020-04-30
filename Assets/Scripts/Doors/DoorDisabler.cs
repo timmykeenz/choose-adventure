@@ -16,7 +16,7 @@ public class DoorDisabler : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.GetComponent<Transform>().position.z > 24.55)
+        if (other.gameObject.GetComponent<Transform>().position.z > 24.55 && other.CompareTag("Player"))
         {
             //Make sure door only closes once
             if (!StoryPilot.roomChosen)

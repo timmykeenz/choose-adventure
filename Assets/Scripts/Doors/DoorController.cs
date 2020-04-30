@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
+    //Variables to allow user to open/close door
     public bool isOpen;
     private GameObject nearTo;
     private bool userCanOpen;
-    // Start is called before the first frame update
+
     void Start()
     {
         nearTo = null;
@@ -40,18 +41,24 @@ public class DoorController : MonoBehaviour
         nearTo = null;
     }
     
-    //Setter to update user's power status on door
+    /*
+     * Setter to update user's power status on door
+     */
     public void SetUserCanOpen(bool userCanOpen)
     {
         this.userCanOpen = userCanOpen;
     }
-    //Getter to retrieve user's status on door
+    /*
+     * Getter to retrieve user's status on door
+     */
     public bool GetUserCanOpen()
     {
         return userCanOpen;
     }
 
-    //Public function that toggles the door (Can be used by outside classes
+    /*
+     * Public function that toggles the door (Can be used by outside classes
+     */
     public void ToggleDoor()
     {
         isOpen = !isOpen;

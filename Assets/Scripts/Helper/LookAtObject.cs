@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LookAtObject : MonoBehaviour
 {
+    //Object that the GameObject will look at
     public GameObject objectToLookAt;
+    //Target grabs the transform from the object
     private Transform target;
     // Start is called before the first frame update
     void Start()

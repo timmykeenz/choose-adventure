@@ -1,17 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DisplayInRange : MonoBehaviour
 {
     public GameObject player;
     public float showDistance;
-    [HideInInspector] float distance;
-    [HideInInspector] public bool displayText;
+    //Distance from player and boolean to determine if object should display
+    private float distance;
+    [HideInInspector] public bool displayObject;
     // Start is called before the first frame update
     void Start()
     {
-        displayText = true;
+        displayObject = true;
     }
 
     // Update is called once per frame
@@ -20,7 +19,7 @@ public class DisplayInRange : MonoBehaviour
         //Calculate distance from object to player
         distance = Vector3.Distance(player.GetComponent<Transform>().transform.position, transform.position);
         //Make object visible when in range
-        if (distance < showDistance && displayText)
+        if (distance < showDistance && displayObject)
         {
             GetComponent<MeshRenderer>().enabled = true;
         }

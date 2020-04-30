@@ -4,27 +4,30 @@ using UnityEngine;
 
 public class StoryPilot : MonoBehaviour
 {
+    //PUBLIC OBJECTS
     public GameObject gate;
     public GameObject batteryHolderText;
     public GameObject radioHelpText;
     public DoorController redDoor;
     public DoorController blueDoor;
-    [HideInInspector] public static DoorController redRefDoor;
-    [HideInInspector] public static DoorController blueRefDoor;
     public GameObject blueChoiceRoom;
     public GameObject redChoiceRoom;
     public float roomDeactivationTime;
+    public AudioSource audioSource;
+    public AudioSource radioSource;
+    //LOCAL VARIABLES
+    private bool startRadio;
+    private bool doorsEnabled;
+    private bool loadFullMusic;
+    //STATIC ELEMENTS (Used in tracking outside Scripts)
+    [HideInInspector] public static DoorController redRefDoor;
+    [HideInInspector] public static DoorController blueRefDoor;
     [HideInInspector] public static bool redRoomTrigger;
     [HideInInspector] public static bool blueRoomTrigger;
     [HideInInspector] public static bool roomChosen;
     public static bool entryGateOpened;
     public static bool hasGrabbedBattery;
     private static bool showHolderText;
-    private bool startRadio;
-    private bool doorsEnabled;
-    private bool loadFullMusic;
-    public AudioSource audioSource;
-    public AudioSource radioSource;
 
     private void Start()
     {

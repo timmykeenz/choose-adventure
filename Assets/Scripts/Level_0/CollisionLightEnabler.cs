@@ -6,7 +6,12 @@ public class CollisionLightEnabler : MonoBehaviour
 {
     public GameObject objectToCollide;
     public GameObject lightToEnable;
-    bool hasTriggered = false;
+    bool hasTriggered;
+
+    void Start()
+    {
+        hasTriggered = false;
+    }
 
     private void OnTriggerEnter(Collider collider)
     {
@@ -14,11 +19,6 @@ public class CollisionLightEnabler : MonoBehaviour
         {
             hasTriggered = true;
             lightToEnable.GetComponent<Light>().enabled = true;
-        }
-        else if (hasTriggered && collider.gameObject.tag.Equals(objectToCollide.tag))
-        {
-            hasTriggered = false;
-            lightToEnable.GetComponent<Light>().enabled = false;
         }
     }
 }

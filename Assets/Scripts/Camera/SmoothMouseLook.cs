@@ -31,7 +31,9 @@ public class SmoothMouseLook : MonoBehaviour
             transform.localRotation = yQuaternion;
         }
     }
-    // Function created by some smart dude that clamps the mouse angle using normalization
+    /*
+     * Function created by a smart guy that clamps the camera at a min/max angle
+     */
     public static float ClampAngle(float angle, float min, float max)
     {
         angle %= 360;

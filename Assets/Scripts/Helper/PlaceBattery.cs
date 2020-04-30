@@ -13,12 +13,13 @@ public class PlaceBattery : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //Checks if the tag is a battery
-        if (other.tag.Equals("Battery") && !isConnected)
+        if (other.CompareTag("Battery") && !isConnected)
         {
+            //Force user to drop the battery so it can connect
             CameraGrab.isGrabbing = false;
             //Set isConnected
             isConnected = true;
-            //Make it so the Rigidbody can't move
+            //Make it so the Rigidbody can't move (Also makes the object ungrabbable)
             other.GetComponent<Rigidbody>().isKinematic = true;
             //Update the object's parent
             other.GetComponent<Transform>().parent = this.GetComponent<Transform>();

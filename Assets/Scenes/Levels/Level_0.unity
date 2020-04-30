@@ -11629,7 +11629,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3168788812960087700, guid: 154fe905bd9b43847900205413278211, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 154fe905bd9b43847900205413278211, type: 3}
 --- !u!1001 &426401070
 PrefabInstance:
@@ -13019,7 +13020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 912409456}
   showDistance: 3
-  displayText: 0
+  displayObject: 0
 --- !u!114 &677630684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21532,7 +21533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 912409456}
   showDistance: 3
-  displayText: 0
+  displayObject: 0
 --- !u!114 &1678541287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21799,7 +21800,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 912409456}
   showDistance: 3
-  displayText: 0
+  displayObject: 0
 --- !u!114 &1816686225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23378,7 +23379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 912409456}
   showDistance: 3
-  displayText: 0
+  displayObject: 0
 --- !u!114 &2048745685
 MonoBehaviour:
   m_ObjectHideFlags: 0

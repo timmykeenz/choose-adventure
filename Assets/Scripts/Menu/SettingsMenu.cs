@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -40,24 +39,32 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.RefreshShownValue();
     }
 
-    //Function allows volume slider to adjust in-game volume
+    /**
+     * Function allows volume slider to adjust in-game volume
+     */
     public void SetVolume(float volume)
     {
         audioMixer.SetFloat("masterVolume", volume);
     }
-
-    //Function sets the in-game graphics quality
+    /**
+     * Function sets the in-game graphics quality
+     */
     public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
     }
 
-    //Function sets the game to fullscreen/windowed
+    /**
+     * Function sets the game to fullscreen/windowed
+     */
     public void SetFullScreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
     }
 
+    /**
+     * Function sets screen resolution
+     */
     public void SetResolution(int resolutionIndex)
     {
         //Grab the resolution chosen from the dropdown

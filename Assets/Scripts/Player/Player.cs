@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public float fallSpeed;
     public float minimumTerrainAngle;
     public float angleBoost;
-    //Grab our distance to ground
+    //Store the distance to ground
     [HideInInspector] float distToGround;
     //Setup the different force directions
     [HideInInspector] Vector3 forward = new Vector3();
@@ -20,17 +20,18 @@ public class Player : MonoBehaviour
     [HideInInspector] Vector3 right = new Vector3();
     [HideInInspector] Vector3 back = new Vector3();
     //Grab our rigidbody to control forces
-    [HideInInspector] Rigidbody rigidbody;
+    [HideInInspector] Rigidbody rb;
     //Setup movement booleans
     private bool moveForward = false;
     private bool moveBack = false;
     private bool moveLeft = false;
     private bool moveRight = false;
+
     // Start is called before the first frame update
     void Start()
     {
         //Grab player rigid body component
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         //Setup forces for basic player movement
         UpdateTargetVelocity(maxVelocity);
         // get the distance to ground
@@ -95,7 +96,7 @@ public class Player : MonoBehaviour
         //Check if space is hit for jumping and check if player is on ground
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
-            rigidbody.AddForce(0, jumpForce, 0, ForceMode.Impulse);
+            rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
         }
     }
 
@@ -126,25 +127,22 @@ public class Player : MonoBehaviour
         //If player is in the air, increase gravity for a quicker fall time
         if (!IsGrounded())
         {
-            rigidbody.AddForce(Physics.gravity * (rigidbody.mass * rigidbody.mass * fallSpeed));
+            rb.AddForce(Physics.gravity * (rb.mass * rb.mass * fallSpeed));
         }
 
         //Implement braking if no button is pressed
         if (!Input.GetKey("w") && !Input.GetKey("s") && !Input.GetKey("a") && !Input.GetKey("d") && IsGrounded())
         {
-            rigidbody.velocity *= 0.85f;
+            rb.velocity *= 0.85f;
         }
     }
-    //Debugging speed GUI
-    void OnGUI()
-    {
-        GUI.Label(new Rect(20, 20, 200, 200), "rigidbody velocity: " + rigidbody.velocity);
-    }
-    //Function that applies force to move the character with top speed and acceleration
+    /**
+     * Function that applies force to move the character with top speed and acceleration
+     */
     public void AccelerateTo(Vector3 targetVelocity, float maxAccel)
     {
         //Setup our temporary vector
-        Vector3 tempVec = rigidbody.velocity;
+        Vector3 tempVec = rb.velocity;
         //Figure out which axis (will always be x/z) we are working with
         if (targetVelocity.x != 0)
         {
@@ -171,8 +169,11 @@ public class Player : MonoBehaviour
             }
         }
         //Apply the force
-        rigidbody.AddRelativeForce(accel, ForceMode.Acceleration);
+        rb.AddRelativeForce(accel, ForceMode.Acceleration);
     }
+    /**
+     * Checks the slope below player to determine if a boost needs to be applied
+     */
     private float CheckSlope()
     {
         float slope = 0f;
@@ -183,7 +184,9 @@ public class Player : MonoBehaviour
         }
         return slope;
     }
-    //Function to update all velocities to one speed
+    /**
+     * Function to update all velocities to one speed
+     */
     void UpdateTargetVelocity(float target)
     {
         this.forward.Set(0, 0, target);
@@ -191,7 +194,9 @@ public class Player : MonoBehaviour
         this.left.Set(-target, 0, 0);
         this.right.Set(target, 0, 0);
     }
-    //Check if player is on ground
+    /**
+     * Check if player is on ground
+     */
     bool IsGrounded()
     {
         //Raycast to determine if player is on ground, 0.1f is the play in case the ground isn't perfectly even

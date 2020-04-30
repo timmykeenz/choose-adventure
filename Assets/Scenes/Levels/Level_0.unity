@@ -15355,7 +15355,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Radio
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2796318241258983461, guid: 7e9d123afe61d1a44954d9f097b6588c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7e9d123afe61d1a44954d9f097b6588c, type: 3}
 --- !u!1 &1339416898 stripped
 GameObject:

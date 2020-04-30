@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HeadBob : MonoBehaviour
 {
@@ -28,10 +26,10 @@ public class HeadBob : MonoBehaviour
             else
             {
                 waveslice = Mathf.Sin(timer);
-                timer = timer + bobbingSpeed;
+                timer += bobbingSpeed;
                 if (timer > Mathf.PI * 2)
                 {
-                    timer = timer - (Mathf.PI * 2);
+                    timer -= (Mathf.PI * 2);
                 }
             }
             if (waveslice != 0)

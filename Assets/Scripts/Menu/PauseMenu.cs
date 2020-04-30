@@ -1,18 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool gameIsPaused = false;
     public GameObject inGameHUD;
     public GameObject pauseMenuUI;
-    public AudioSource audioSource;
+    private AudioSource[] audioSources;
+    [HideInInspector] public static bool gameIsPaused = false;
 
     //On start, make the mouse hidden
     void Start()
     {
+        audioSources = Component.FindObjectsOfType<AudioSource>();
         //Make cursor invisible
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -32,11 +31,35 @@ public class PauseMenu : MonoBehaviour
             }
         }
     }
-    //Function resumes gameplay
+    /**
+     * Function pauses all active audio in the game
+     */
+    public void PauseAllAudio()
+    {
+        // Loop through and pause each audio source
+        foreach (AudioSource audioSource in audioSources)
+        {
+            audioSource.Pause();
+        }
+    }
+    /**
+     * Resumes all active audio that is playing in the game
+     */
+    public void ResumeAllAudio()
+    {
+        // Loop through and resume each audio source
+        foreach (AudioSource audioSource in audioSources)
+        {
+            audioSource.UnPause();
+        }
+    }
+    /**
+     * Function resumes gameplay
+     */
     public void Resume()
     {
         //Resume the music
-        audioSource.UnPause();
+        ResumeAllAudio();
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         gameIsPaused = false;
@@ -46,11 +69,13 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
-    //Function pauses game
+    /**
+     * Function pauses game
+     */
     private void Pause()
     {
         //Pause the music
-        audioSource.Pause();
+        PauseAllAudio();
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         gameIsPaused = true;
@@ -60,6 +85,9 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
+    /**
+     * Function loads the menu
+     */
     public void LoadMenu()
     {
         //Unpause game
@@ -70,6 +98,9 @@ public class PauseMenu : MonoBehaviour
         //Scene of index 0 should always be menu...
         SceneManager.LoadScene(0);
     }
+    /**
+     * Function exits the game
+     */
     public void QuitGame()
     {
         Debug.Log("Quitting game...");

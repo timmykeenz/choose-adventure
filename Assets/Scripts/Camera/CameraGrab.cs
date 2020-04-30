@@ -1,21 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraGrab : MonoBehaviour
 {
     //Get the position passed through where the grabbed object should move to (Should be a child object of the camera)
     public Transform grabPosition;
     public Transform grabLookPosition;
+    //How fast a given item should rotate towards a player
     public float rotSpeed;
     //Setup user manipulatable grab parameters
     public string grabKey;
     public int grabDistance;
     public float throwReduction;
     public int grabMoveSpeed;
-    [HideInInspector] public static bool isGrabbing = false;
     //Variables to check which object we are grabbing and whether we are hitting them.
     [HideInInspector] public RaycastHit hit;
+    //These variables are static so other classes can retrieve information on the object grabbed
+    [HideInInspector] public static bool isGrabbing = false;
     [HideInInspector] public static GameObject objectGrabbed;
 
     //Update runs every frame
@@ -23,6 +23,7 @@ public class CameraGrab : MonoBehaviour
     {
         GrabObject();
     }
+    //FixedUpdate runs a variable amount of times for physics calculations
     private void FixedUpdate()
     {
         //Only update when grabbing an object
@@ -39,7 +40,10 @@ public class CameraGrab : MonoBehaviour
             }
         }
     }
-    //Method for grabbing objects
+    /**
+     * Function determines if object can be grabbed.  If so, it will update
+     * properties that will make FixedUpdate() run for physics calculations.
+     */
     public void GrabObject()
     {
         //Check if the grab key is pressed, they are looking at an object, and that the object is grabbable

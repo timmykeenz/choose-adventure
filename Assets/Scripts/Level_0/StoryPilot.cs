@@ -15,10 +15,13 @@ public class StoryPilot : MonoBehaviour
     public float roomDeactivationTime;
     public AudioSource audioSource;
     public AudioSource radioSource;
+    public AudioSource radioRed;
+    public AudioSource radioBlue;
     //LOCAL VARIABLES
     private bool startRadio;
     private bool doorsEnabled;
     private bool loadFullMusic;
+    private bool playRoomChoice;
     //STATIC ELEMENTS (Used in tracking outside Scripts)
     [HideInInspector] public static DoorController redRefDoor;
     [HideInInspector] public static DoorController blueRefDoor;
@@ -61,6 +64,7 @@ public class StoryPilot : MonoBehaviour
         loadFullMusic = false;
         //Song URL is empty be default
         songURL = "";
+        //Bool to make sure audio is only played once
     }
 
     void Update()
@@ -87,14 +91,33 @@ public class StoryPilot : MonoBehaviour
                     loadFullMusic = true;
                     songURL = "Audio/Level0/Level0BG_Full";
                 }
-                //---- Use redRoomTrigger and blueRoomTrigger to determine which path the user took ----
+                // See if the final audio clip has been played
+                if (!playRoomChoice)
+                {
+                    playRoomChoice = true;
+                    //If not, check if the red room was chosen
+                    if (redRoomTrigger)
+                    {
+                        //If so, play the clip
+                        radioRed.clip = (AudioClip)Resources.Load("Audio/Level0/RadioAudioRed");
+                        radioRed.Play();
+                    }
+                    //Check if the blue room was chosen
+                    if (blueRoomTrigger)
+                    {
+                        //If so, play the right clip
+                        radioBlue.clip = (AudioClip)Resources.Load("Audio/Level0/RadioAudioBlue");
+                        radioBlue.Play();
+                    }
+
+                }
                 //Check if the player is trying to use an object
                 if (CameraUse.objectToUse)
                 {
-                    if (CameraUse.objectToUse.tag.Equals("Book") && CameraUse.isUsing)
+                    if (CameraUse.objectToUse.CompareTag("Book") && CameraUse.isUsing)
                     {
                         //Load Menu
-                        Levels levelSelector = new Levels();
+                        Levels levelSelector = gameObject.AddComponent<Levels>();
                         levelSelector.LoadMenu();
                     }
                 }
@@ -179,11 +202,11 @@ public class StoryPilot : MonoBehaviour
                 showHolderText = true;
             }
             //Check if the user has grabbed a battery yet
-            if (CameraGrab.objectGrabbed.tag.Equals("Battery") && !hasGrabbedBattery)
+            if (CameraGrab.objectGrabbed.CompareTag("Battery") && !hasGrabbedBattery)
             {
                 hasGrabbedBattery = true;
                 //Check if we have a tutorial element
-                if (GameObject.Find("GrabHelperText").tag.Equals("Tutorial"))
+                if (GameObject.Find("GrabHelperText").CompareTag("Tutorial"))
                 {
                     //If so remove the text
                     GameObject.Find("GrabHelperText").SetActive(false);
@@ -196,7 +219,7 @@ public class StoryPilot : MonoBehaviour
         //Check if the player is trying to use an object
         if (CameraUse.objectToUse)
         {
-            if (CameraUse.objectToUse.tag.Equals("Radio") && CameraUse.isUsing)
+            if (CameraUse.objectToUse.CompareTag("Radio") && CameraUse.isUsing)
             {
                 if (!startRadio)
                 {
@@ -210,6 +233,14 @@ public class StoryPilot : MonoBehaviour
                     if (radioSource.isPlaying)
                     {
                         radioSource.Stop();
+                    }
+                    if (radioBlue.isPlaying)
+                    {
+                        radioBlue.Stop();
+                    }
+                    if (radioRed.isPlaying)
+                    {
+                        radioRed.Stop();
                     }
                 }
             }

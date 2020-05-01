@@ -18,7 +18,7 @@ public class AudioSync : MonoBehaviour
     void Start()
     {
         //CHANGE OFFSET TO ADJUST TIME MIXING
-        offset = 0.045f;
+        offset = 0.025f;
         //Variables that require some simple math to figure out when the beat should change
         bps = 60f / (float)bpm;
         inSync = false;

@@ -28,6 +28,8 @@ public class StoryPilot : MonoBehaviour
     public static bool entryGateOpened;
     public static bool hasGrabbedBattery;
     private static bool showHolderText;
+    //Song switching variables
+    private static string songURL;
 
     private void Start()
     {
@@ -57,6 +59,8 @@ public class StoryPilot : MonoBehaviour
         blueRefDoor = blueDoor;
         //Music will not be fully loaded at start
         loadFullMusic = false;
+        //Song URL is empty be default
+        songURL = "";
     }
 
     void Update()
@@ -81,8 +85,7 @@ public class StoryPilot : MonoBehaviour
                 if (!loadFullMusic)
                 {
                     loadFullMusic = true;
-                    audioSource.clip = (AudioClip)Resources.Load("Audio/Level0/Level0BG_Full");
-                    audioSource.Play();
+                    songURL = "Audio/Level0/Level0BG_Full";
                 }
                 //---- Use redRoomTrigger and blueRoomTrigger to determine which path the user took ----
                 //Check if the player is trying to use an object
@@ -97,6 +100,7 @@ public class StoryPilot : MonoBehaviour
                 }
             }
         }
+        CheckSong();
     }
     private void CheckDoors()
     { 
@@ -154,8 +158,7 @@ public class StoryPilot : MonoBehaviour
             showHolderText = false;
             entryGateOpened = true;
             gate.GetComponentInChildren<Animator>().Play("OpenGate");
-            audioSource.clip = (AudioClip)Resources.Load("Audio/Level0/Level0BG_Mixed");
-            audioSource.Play();
+            songURL = "Audio/Level0/Level0BG_Mixed";
         }
         //Check if we should show the text for the battery holder
         if (showHolderText)
@@ -211,5 +214,23 @@ public class StoryPilot : MonoBehaviour
                 }
             }
         }
+    }
+    private void CheckSong()
+    {
+        //Check to make sure string is not empty
+        if (!songURL.Equals(""))
+        {
+            //Start coroutine to change song on next beat change
+            StartCoroutine(ChangeSong(AudioSync.GetTime(), songURL));
+            //Reset triggers
+            songURL = "";
+        }
+    }
+    IEnumerator ChangeSong(float time, string clipURL)
+    {
+        //Make code wait for 'x' amount of time before executing below
+        yield return new WaitForSeconds(time);
+        //Change the song
+        AudioSync.ChangeSong(clipURL);
     }
 }

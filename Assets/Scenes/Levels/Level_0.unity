@@ -13437,6 +13437,7 @@ GameObject:
   m_Component:
   - component: {fileID: 936596697}
   - component: {fileID: 936596698}
+  - component: {fileID: 936596699}
   m_Layer: 0
   m_Name: StoryPilot
   m_TagString: Untagged
@@ -13480,6 +13481,21 @@ MonoBehaviour:
   roomDeactivationTime: 0.5
   audioSource: {fileID: 1893493301}
   radioSource: {fileID: 4896651302157087760}
+--- !u!114 &936596699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936596696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c444b3489b5b0f4599856749eb84f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bpm: 94
+  ticksPerLoop: 16
+  bgMusic: {fileID: 1893493301}
 --- !u!64 &953944108
 MeshCollider:
   m_ObjectHideFlags: 0
